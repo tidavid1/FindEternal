@@ -22,11 +22,18 @@ repositories {
 }
 
 dependencies {
+	// ThymeLeaf
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	// SpringBoot Web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// SpringBoot WebFlux
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	// JSON
+	implementation 'org.json:json:20230618'
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	// SpringBoot Test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 }
