@@ -7,24 +7,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public User findByNickname(String nickName){
-        return userRepository.findByNickname(nickName).orElseThrow(CUserNotFoundException::new);
+    public Optional<User> findByUserNum(Integer userNum){
+        return userRepository.findByUserNum(userNum);
     }
 
     @Transactional
-    public User findByUserNum(Integer userNum){
-        return userRepository.findByUserNum(userNum).orElseThrow(CUserNotFoundException::new);
-    }
-
-    @Transactional
-    public void updateNickName(Integer userNum, String nickName){
-        User user = findByUserNum(userNum);
-        user.updateNickname(nickName);
+    public void addUser(User user){
+        userRepository.save(user);
     }
 }

@@ -28,15 +28,13 @@ public class WebClientProvider {
                 .build();
     }
 
-    // TODO: FIX!
-    public String get(){
-        JSONObject result = webClient.get()
-                .uri("/v1/user/games/146501")
+    public JSONObject requestNicknameAPI(String nickname){
+        return webClient.get()
+                .uri("/v1/user/nickname?query={nickname}", nickname)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(String.class)
                 .map(JSONObject::new)
                 .block();
-        return result.toString();
     }
 }
