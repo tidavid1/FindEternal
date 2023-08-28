@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Properties ###
+/src/main/resources/eternal.properties
+/src/main/resources/database.properties
