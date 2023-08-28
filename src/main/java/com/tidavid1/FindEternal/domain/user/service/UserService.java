@@ -1,7 +1,6 @@
 package com.tidavid1.FindEternal.domain.user.service;
 
 import com.tidavid1.FindEternal.domain.user.entity.User;
-import com.tidavid1.FindEternal.domain.user.exception.CUserNotFoundException;
 import com.tidavid1.FindEternal.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
