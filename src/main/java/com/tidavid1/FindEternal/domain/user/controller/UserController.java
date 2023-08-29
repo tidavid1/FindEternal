@@ -22,20 +22,19 @@ public class UserController {
 
     @GetMapping("")
     public String userPage(@RequestParam String nickname){
-        JSONObject result = webClientProvider.requestNicknameAPI(nickname);
-        if (!result.get("code").equals(200)){
-            throw new CUserNotFoundException();
-        }
-        if(userService.findByUserNum(result.getJSONObject("user").getInt("userNum")).isEmpty()){
-            userService.addUser(User.builder()
-                    .userNum(result.getJSONObject("user").getInt("userNum"))
-                    .nickname(nickname)
-                    .build());
-        }else{
-            User user = userService.findByUserNum(result.getJSONObject("user").getInt("userNum")).get();
-            if(!user.getNickname().equals(nickname)){
-                user.updateNickname(nickname);
+        User user = userService.findByNickname(nickname).orElseGet(()->{
+            JSONObject result = webClientProvider.requestNicknameAPI(nickname);
+            if(!(result.getInt("code")==200)){
+                throw new CUserNotFoundException();
             }
+            result = result.getJSONObject("user");
+            User temp = User.builder().userNum(result.getInt("userNum")).nickname(nickname).build();
+            userService.addUser(temp);
+            return temp;
+        });
+        if(!userService.findByUserNum(user.getUserNum()).getNickname().equals(nickname)){
+            user = userService.findByUserNum(user.getUserNum());
+            user.updateNickname(nickname);
         }
         return "user";
     }
