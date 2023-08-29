@@ -37,4 +37,64 @@ public class WebClientProvider {
                 .map(JSONObject::new)
                 .block();
     }
+
+    public JSONObject requestGameDataAPI(Integer gameId){
+        return webClient.get()
+                .uri("/v1/games/{gameId}", gameId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
+
+    public JSONObject requestGameDataAPI(Integer gameId, String next){
+        return webClient.get()
+                .uri("/v1/games/{gameId}?next={next}", gameId, next)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
+
+    public JSONObject requestUserRankAPI(int matchingTeamMode, int seasonId, Integer userNum){
+        return webClient.get()
+                .uri("/v1/rank/{userNum}/{seasonId}/{matchingTeamMode}", userNum, seasonId, matchingTeamMode)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
+
+    public JSONObject requestUserGamesDataAPI(Integer userNum){
+        return webClient.get()
+                .uri("/v1/user/games/{userNum}", userNum)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
+
+    public JSONObject requestUserGamesDataAPI(Integer userNum, String next){
+        return webClient.get()
+                .uri("/v1/user/games/{userNum}?next={next}", userNum, next)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
+
+    public JSONObject requestUserStats(Integer userNum, int seasonId){
+        return webClient.get()
+                .uri("/v1/user/stats/{userNum}/{seasonId}", userNum, seasonId)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .bodyToMono(String.class)
+                .map(JSONObject::new)
+                .block();
+    }
 }

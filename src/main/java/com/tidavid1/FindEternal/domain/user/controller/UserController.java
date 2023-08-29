@@ -36,6 +36,8 @@ public class UserController {
             user = userService.findByUserNum(user.getUserNum());
             user.updateNickname(nickname);
         }
+        // TODO: 평균 수치 View
+        // TODO: 대전 기록 View
         return "user";
     }
 }
