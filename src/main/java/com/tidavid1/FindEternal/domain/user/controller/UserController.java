@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("")
-    public String userPage(@RequestParam String nickname){
+    public String userPage(@RequestParam String nickname, Model model){
         User user = userService.findByNickname(nickname).orElseGet(()->{
             JSONObject result = webClientProvider.requestNicknameAPI(nickname);
             if(!(result.getInt("code")==200)){
@@ -36,7 +37,10 @@ public class UserController {
             user = userService.findByUserNum(user.getUserNum());
             user.updateNickname(nickname);
         }
+        model.addAttribute("nickname", nickname);
         // TODO: 평균 수치 View
+        JSONObject stats = webClientProvider.requestUserStats(user.getUserNum(), 19).getJSONArray("userStats").getJSONObject(0);
+        model.addAttribute("stats", stats);
         // TODO: 대전 기록 View
         return "user";
     }

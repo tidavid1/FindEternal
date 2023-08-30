@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Find Eternal</title>
 </head>
 <body>
+    <div class="user-info">
+        UserInfo: <span th:text="${nickname}"/>
+    </div>
+    <div class="user-stats">
+        Season: <span th:text="${stats.get('seasonId')}"/><br>
+        Total Game: <span th:text="${stats.get('totalGames')}"/> | MMR: <span th:text="${stats.get('mmr')}"/> | Rank %: <span th:text="${stats.get('rankPercent')}"/> <br>
+        Avg. Kill: <span th:text="${stats.get('averageKills')}"/> | Avg. Rank: <span th:text="${stats.get('averageRank')}"/> | Escape Count: <span th:text="${stats.get('escapeCount')}"/><br>
+        <br>Top Percentage
+        Top 1: <span th:text="${stats.get('top1')}"/> | Top 2: <span th:text="${stats.get('top2')}"/> | Top 3: <span th:text="${stats.get('top3')}"/> <br>
+        <br>Most Characters<br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Character</th>
+                    <th>Total Games</th>
+                    <th>win</th>
+                    <th>Avg. Rank</th>
+                    <th>Top 3</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="character: ${stats.getJSONArray('characterStats')}">
+                    <th th:text="${character.get('characterCode')}"/>
+                    <th th:text="${character.get('totalGames')}"/>
+                    <th th:text="${character.get('wins')}"/>
+                    <th th:text="${character.get('averageRank')}"/>
+                    <th th:text="${character.getInt('top3')}"/>
+                </tr>
+            </tbody>
+        </table>
 
+    </div>
 </body>
 </html>
