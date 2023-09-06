@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
-    @Query("select u from Player u where u.nickname = :nickname")
+    @Query("select p from Player p where p.nickname = :nickname")
     Optional<Player> findByNickname(@Param("nickname") String nickname);
 
-    @Query("select u from Player u where u.userNum = :userNum")
+    @Query("select p from Player p where p.userNum = :userNum")
     Optional<Player> findByUserNum(@Param("userNum") Integer userNum);
 }
