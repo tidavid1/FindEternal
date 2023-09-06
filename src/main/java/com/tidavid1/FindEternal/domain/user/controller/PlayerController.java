@@ -1,9 +1,9 @@
 package com.tidavid1.FindEternal.domain.user.controller;
 
 import com.tidavid1.FindEternal.common.config.WebClientProvider;
-import com.tidavid1.FindEternal.domain.user.entity.User;
-import com.tidavid1.FindEternal.domain.user.exception.CUserNotFoundException;
-import com.tidavid1.FindEternal.domain.user.service.UserService;
+import com.tidavid1.FindEternal.domain.user.entity.Player;
+import com.tidavid1.FindEternal.domain.user.exception.CPlayerNotFoundException;
+import com.tidavid1.FindEternal.domain.user.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
@@ -16,30 +16,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/player")
+public class PlayerController {
     private final WebClientProvider webClientProvider;
-    private final UserService userService;
+    private final PlayerService playerService;
 
     @GetMapping("")
     public String userPage(@RequestParam String nickname, Model model){
-        User user = userService.findByNickname(nickname).orElseGet(()->{
+        Player player = playerService.findByNickname(nickname).orElseGet(()->{
             JSONObject result = webClientProvider.requestNicknameAPI(nickname);
             if(!(result.getInt("code")==200)){
-                throw new CUserNotFoundException();
+                throw new CPlayerNotFoundException();
             }
             result = result.getJSONObject("user");
-            User temp = User.builder().userNum(result.getInt("userNum")).nickname(nickname).build();
-            userService.addUser(temp);
+            Player temp = Player.builder().userNum(result.getInt("userNum")).nickname(nickname).build();
+            playerService.addUser(temp);
             return temp;
         });
-        if(!userService.findByUserNum(user.getUserNum()).getNickname().equals(nickname)){
-            user = userService.findByUserNum(user.getUserNum());
-            user.updateNickname(nickname);
+        if(!playerService.findByUserNum(player.getUserNum()).getNickname().equals(nickname)){
+            player = playerService.findByUserNum(player.getUserNum());
+            player.updateNickname(nickname);
         }
         model.addAttribute("nickname", nickname);
         // TODO: 평균 수치 View
-        JSONObject stats = webClientProvider.requestUserStats(user.getUserNum(), 19).getJSONArray("userStats").getJSONObject(0);
+        JSONObject stats = webClientProvider.requestUserStats(player.getUserNum(), 19).getJSONArray("userStats").getJSONObject(0);
         model.addAttribute("stats", stats);
         // TODO: 대전 기록 View
         return "user";
