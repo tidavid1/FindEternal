@@ -1,4 +1,4 @@
-package com.tidavid1.FindEternal.domain.user.entity;
+package com.tidavid1.FindEternal.domain.player.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user")
+@Table(name = "player")
 @Entity
-public class User {
+public class Player {
     @Id
     private Integer userNum;
 
