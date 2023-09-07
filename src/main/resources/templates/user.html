@@ -9,33 +9,10 @@
         UserInfo: <span th:text="${nickname}"/>
     </div>
     <div class="user-stats">
-        Season: <span th:text="${stats.get('seasonId')}"/><br>
-        Total Game: <span th:text="${stats.get('totalGames')}"/> | MMR: <span th:text="${stats.get('mmr')}"/> | Rank %: <span th:text="${stats.get('rankPercent')}"/> <br>
-        Avg. Kill: <span th:text="${stats.get('averageKills')}"/> | Avg. Rank: <span th:text="${stats.get('averageRank')}"/> | Escape Count: <span th:text="${stats.get('escapeCount')}"/><br>
-        <br>Top Percentage
-        Top 1: <span th:text="${stats.get('top1')}"/> | Top 2: <span th:text="${stats.get('top2')}"/> | Top 3: <span th:text="${stats.get('top3')}"/> <br>
-        <br>Most Characters<br>
-        <table>
-            <thead>
-                <tr>
-                    <th>Character</th>
-                    <th>Total Games</th>
-                    <th>win</th>
-                    <th>Avg. Rank</th>
-                    <th>Top 3</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="character: ${stats.getJSONArray('characterStats')}">
-                    <th th:text="${character.get('characterCode')}"/>
-                    <th th:text="${character.get('totalGames')}"/>
-                    <th th:text="${character.get('wins')}"/>
-                    <th th:text="${character.get('averageRank')}"/>
-                    <th th:text="${character.getInt('top3')}"/>
-                </tr>
-            </tbody>
-        </table>
-
+        Season: <span th:text="${playerStats.season}"/><br>
+        Avg. Rank: <span th:text="${playerStats.getAverageRank()}"/> | Top 1: <span th:text="${playerStats.getTop1()}"/> | Total Games: <span th:text="${playerStats.getTotalGames()}"/> <br>
+        Avg. Kill: <span th:text="${playerStats.getAverageKills()}"/> || Top 2: <span th:text="${playerStats.getTop2()}"/> | MMR: <span th:text="${playerStats.getMmr()}"/> <br>
+        Avg. Assistants: <span th:text="${playerStats.getAverageAssistants()}"/> | Top 3: <span th:text="${playerStats.getTop3()}"/> | Avg. Hunts: <span th:text="${playerStats.getAverageHunts()}"/><br>
     </div>
 </body>
 </html>
