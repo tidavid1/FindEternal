@@ -1,4 +1,4 @@
-package com.tidavid1.FindEternal.domain.user.exception;
+package com.tidavid1.FindEternal.domain.player.exception;
 
 public class CPlayerNotFoundException extends RuntimeException{
     public CPlayerNotFoundException() {

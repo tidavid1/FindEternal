@@ -1,9 +1,9 @@
-package com.tidavid1.FindEternal.domain.user.controller;
+package com.tidavid1.FindEternal.domain.player.controller;
 
 import com.tidavid1.FindEternal.common.config.WebClientProvider;
-import com.tidavid1.FindEternal.domain.user.entity.Player;
-import com.tidavid1.FindEternal.domain.user.exception.CPlayerNotFoundException;
-import com.tidavid1.FindEternal.domain.user.service.PlayerService;
+import com.tidavid1.FindEternal.domain.player.entity.Player;
+import com.tidavid1.FindEternal.domain.player.exception.CPlayerNotFoundException;
+import com.tidavid1.FindEternal.domain.player.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;

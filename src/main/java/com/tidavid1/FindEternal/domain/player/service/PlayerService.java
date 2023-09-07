@@ -1,8 +1,8 @@
-package com.tidavid1.FindEternal.domain.user.service;
+package com.tidavid1.FindEternal.domain.player.service;
 
-import com.tidavid1.FindEternal.domain.user.entity.Player;
-import com.tidavid1.FindEternal.domain.user.exception.CPlayerNotFoundException;
-import com.tidavid1.FindEternal.domain.user.repository.PlayerRepository;
+import com.tidavid1.FindEternal.domain.player.entity.Player;
+import com.tidavid1.FindEternal.domain.player.exception.CPlayerNotFoundException;
+import com.tidavid1.FindEternal.domain.player.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

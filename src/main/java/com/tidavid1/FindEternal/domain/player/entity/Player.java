@@ -1,4 +1,4 @@
-package com.tidavid1.FindEternal.domain.user.entity;
+package com.tidavid1.FindEternal.domain.player.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
-package com.tidavid1.FindEternal.domain.user.repository;
+package com.tidavid1.FindEternal.domain.player.repository;
 
-import com.tidavid1.FindEternal.domain.user.entity.Player;
+import com.tidavid1.FindEternal.domain.player.entity.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
